@@ -28,7 +28,7 @@ public sealed partial class GroupBox : ContentControl
     }
 
     public static readonly DependencyProperty ThemeProperty =
-     DependencyProperty.Register(nameof(Theme), typeof(GroupBoxTheme), typeof(GroupBox),
+     DependencyProperty.Register(nameof(Theme), typeof(GroupBoxTheme?), typeof(GroupBox),
          new PropertyMetadata(null, OnThemeChanged));
 
     public GroupBox()
