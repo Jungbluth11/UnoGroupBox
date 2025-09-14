@@ -23,7 +23,8 @@
 	
 	<Authors>Jungbluth</Authors>
 	
-	<Description>An WPF-like Groupbox for Uno Platform.</Description>
+	<Description>An WPF-like Groupbox for Uno Platform.
+Supports Theming.</Description>
 	
 	<PackageProjectUrl>https://github.com/Jungbluth11/UnoGroupBox</PackageProjectUrl>
 	
@@ -34,6 +35,12 @@
 	<PackageTags>uno platform groupbox</PackageTags>
 	
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	
+	<AssemblyVersion>1.1.0.0</AssemblyVersion>
+	
+	<FileVersion>1.1.0.0</FileVersion>
+	
+	<Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
@@ -54,5 +61,11 @@
   <ItemGroup>
 	  <None Include="LICENSE.txt" Pack="true" PackagePath="" />
 	  <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Page Update="Themes\Fluent.xaml">
+	  <Generator>MSBuild:Compile</Generator>
+	</Page>
   </ItemGroup>
 </Project>

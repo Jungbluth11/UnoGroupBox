@@ -3,39 +3,49 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="using:UnoGroupBox">
     <Style TargetType="control:GroupBox">
-        <Setter Property="Background" Value="{ThemeResource BackgroundBrush}" />
-        <Setter Property="BorderBrush" Value="{ThemeResource OutlineColor}" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                <ControlTemplate TargetType="control:GroupBox">
+                    <Grid x:Name="RootGrid">
                         <Border
-                            Margin="5,0,0,0"
-                            Padding="5,0,5,0"
+                            x:Name="Border"
+                            Margin="8"
+                            Padding="12,10,12,12"
                             Background="{TemplateBinding Background}"
-                            Canvas.ZIndex="1">
-                            <ContentPresenter
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Header}"
-                                ContentTemplate="{TemplateBinding HeaderTemplate}" />
-                        </Border>
-                        <Border
-                            Grid.RowSpan="2"
-                            Grid.ColumnSpan="2"
-                            Margin="0,10,0,0"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1"
                             CornerRadius="4">
-                            <ContentPresenter Margin="10" Content="{TemplateBinding Content}" />
+                            <ContentPresenter />
                         </Border>
+                        <Border
+                            x:Name="Header"
+                            Margin="20,0,0,0"
+                            Padding="6,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
+                        </Border>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ThemeStates">
+                                <VisualState x:Name="Fluent">
+                                    <VisualState.Setters>
+                                        <Setter Target="Header.Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                                        <Setter Target="Border.Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                                        <Setter Target="Border.BorderBrush" Value="{ThemeResource FocusStrokeColorOuterBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Material">
+                                    <VisualState.Setters>
+                                        <Setter Target="Header.Background" Value="{ThemeResource BackgroundBrush}" />
+                                        <Setter Target="Border.Background" Value="{ThemeResource BackgroundBrush}" />
+                                        <Setter Target="Border.BorderBrush" Value="{ThemeResource OutlineColor}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
