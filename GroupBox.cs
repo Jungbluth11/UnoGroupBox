@@ -14,7 +14,7 @@ public sealed partial class GroupBox : ContentControl
 
     public DataTemplate HeaderTemplate
     {
-        get => (DataTemplate)GetValue(HeaderTemplateProperty);
+        get => (DataTemplate) GetValue(HeaderTemplateProperty);
         set => SetValue(HeaderTemplateProperty, value);
     }
 
@@ -23,7 +23,7 @@ public sealed partial class GroupBox : ContentControl
 
     public GroupBoxTheme Theme
     {
-        get => (GroupBoxTheme)GetValue(ThemeProperty);
+        get => (GroupBoxTheme) GetValue(ThemeProperty);
         set => SetValue(ThemeProperty, value);
     }
 
@@ -40,10 +40,21 @@ public sealed partial class GroupBox : ContentControl
     {
         if (d is GroupBox gb)
         {
-            string state = (GroupBoxTheme)e.NewValue == GroupBoxTheme.Material ? "Material" : "Fluent";
+            string state = (GroupBoxTheme) e.NewValue == GroupBoxTheme.Material ? "Material" : "Fluent";
 
             gb.Loaded += (s, _) => VisualStateManager.GoToState(gb, state, true);
             VisualStateManager.GoToState(gb, state, true);
         }
+    }
+
+    protected override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
+        ApplyTheme();
+    }
+
+    void ApplyTheme()
+    {
+        VisualStateManager.GoToState(this, Theme == GroupBoxTheme.Material ? "Material" : "Fluent", true);
     }
 }
