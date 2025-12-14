@@ -3,8 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="using:UnoGroupBox">
     <Style TargetType="control:GroupBox">
-        <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource FocusStrokeColorOuterBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="control:GroupBox">
@@ -32,16 +32,16 @@
                             <VisualStateGroup x:Name="ThemeStates">
                                 <VisualState x:Name="Fluent">
                                     <VisualState.Setters>
-                                        <Setter Target="Header.Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
-                                        <Setter Target="Border.Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
-                                        <Setter Target="Border.BorderBrush" Value="{ThemeResource FocusStrokeColorOuterBrush}" />
+                                        <Setter Target="Header.Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}, FallbackValue={ThemeResource ApplicationPageBackgroundThemeBrush}}" />
+                                        <Setter Target="Border.Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}, FallbackValue={ThemeResource ApplicationPageBackgroundThemeBrush}}" />
+                                        <Setter Target="Border.BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}, FallbackValue={ThemeResource FocusStrokeColorOuterBrush}}" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Material">
                                     <VisualState.Setters>
-                                        <Setter Target="Header.Background" Value="{ThemeResource BackgroundBrush}" />
-                                        <Setter Target="Border.Background" Value="{ThemeResource BackgroundBrush}" />
-                                        <Setter Target="Border.BorderBrush" Value="{ThemeResource OutlineColor}" />
+                                        <Setter Target="Header.Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}, FallbackValue={ThemeResource BackgroundBrush}}" />
+                                        <Setter Target="Border.Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}, FallbackValue={ThemeResource BackgroundBrush}}" />
+                                        <Setter Target="Border.BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}, FallbackValue={ThemeResource OutlineColor}}" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
