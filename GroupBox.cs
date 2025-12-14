@@ -1,6 +1,5 @@
 namespace UnoGroupBox;
 
-
 public sealed partial class GroupBox : ContentControl
 {
     public object Header
@@ -28,8 +27,8 @@ public sealed partial class GroupBox : ContentControl
     }
 
     public static readonly DependencyProperty ThemeProperty =
-     DependencyProperty.Register(nameof(Theme), typeof(GroupBoxTheme?), typeof(GroupBox),
-         new PropertyMetadata(null, OnThemeChanged));
+     DependencyProperty.Register(nameof(Theme), typeof(GroupBoxTheme), typeof(GroupBox),
+         new PropertyMetadata(GroupBoxTheme.Fluent, OnThemeChanged));
 
     public GroupBox()
     {
