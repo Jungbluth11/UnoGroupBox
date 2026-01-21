@@ -1,0 +1,46 @@
+name: Build and Publish NuGet Package
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "**/*.md"
+      - "**/*.gitignore"
+      - "**/*.gitattributes"
+  workflow_dispatch:
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: true
+  
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore workloads
+        run: dotnet workload restore
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build app for release
+        run: msbuild 
+
+      - name: Publish to NuGet
+        run: dotnet nuget push "./artifacts/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Publish to GitHub Packages
+        run: dotnet nuget push "D:\a\UnoGroupBox\UnoGroupBox\bin\Debug\*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/Jungbluth11/index.json --skip-duplicate
